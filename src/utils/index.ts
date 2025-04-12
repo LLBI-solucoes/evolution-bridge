@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { RetryConfig } from './types';
+import { RetryConfig } from '../types';
 
 /**
  * Verifica se um erro é elegível para retry baseado na configuração

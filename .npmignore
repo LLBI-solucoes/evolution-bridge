@@ -1,22 +1,35 @@
-# Source
+# Source code
 src/
 
-# TypeScript config
+# Config files
 tsconfig.json
-
-# Development files
 .gitignore
 .git
+.npmignore
 
-# IDE files
+# Development files
 .vscode/
 .idea/
+.github/
 
 # Tests
 tests/
 *.test.ts
 *.spec.ts
 
+# Documentation
+docs/
+*.md
+LICENSE
+
 # Misc
 *.log
 .DS_Store
+
+# Development dependencies
+node_modules/
+
+# Build artifacts
+*.tsbuildinfo
+.npm
+.eslintcache
