@@ -6,50 +6,50 @@ export class EvolutionBridge {
   private instance: string;
 
   constructor(config: EvolutionBridgeConfig) {
-    if (!config.url) {
-      throw new Error("url é obrigatória para inicializar o EvolutionBridge");
-    }
+    const { url, apiKey, instance } = config;
 
-    if (!config.apiKey) {
+    if (!url) {
       throw new Error(
-        "apiKey é obrigatória para inicializar o EvolutionBridge"
+        "The 'url' property is required to initialize EvolutionBridge."
       );
     }
 
-    if (!config.instance) {
+    if (!apiKey) {
       throw new Error(
-        "instance é obrigatória para inicializar o EvolutionBridge"
+        "The 'apiKey' property is required to initialize EvolutionBridge."
+      );
+    }
+
+    if (!instance) {
+      throw new Error(
+        "The 'instance' property is required to initialize EvolutionBridge."
       );
     }
 
     this.client = axios.create({
-      baseURL: config.url,
+      baseURL: url,
       headers: {
         "Content-Type": "application/json",
-        apikey: config.apiKey,
+        apikey: apiKey,
       },
       maxBodyLength: Infinity,
     });
 
-    this.instance = config.instance;
+    this.instance = instance;
   }
 
-  async sendText<T>({
+  private post<T>({ url, data, config = {} }: Post): Promise<AxiosResponse<T>> {
+    return this.client.post<T>(url, data, config);
+  }
+
+  public sendText<T>({
     data,
     config = {},
   }: SendText): Promise<AxiosResponse<T>> {
-    return this.post({
+    return this.post<T>({
       url: `/message/sendText/${this.instance}`,
       data,
       config,
     });
-  }
-
-  private async post<T>({
-    url,
-    data,
-    config = {},
-  }: Post): Promise<AxiosResponse<T>> {
-    return this.client.post<T>(url, data, config);
   }
 }
