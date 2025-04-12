@@ -5,9 +5,10 @@ import { delay, shouldRetryRequest } from '../utils';
 export class EvolutionBridge {
     private client: AxiosInstance;
     private retryConfig: RetryConfig;
+    private apiKey?: string;
 
     constructor(config: EvolutionBridgeConfig = {}) {
-        const { retryConfig, ...axiosConfig } = config;
+        const { retryConfig, apiKey, ...axiosConfig } = config;
 
         this.client = axios.create(axiosConfig);
         this.retryConfig = {
@@ -15,6 +16,7 @@ export class EvolutionBridge {
             retryDelay: retryConfig?.retryDelay ?? 1000,
             shouldRetry: retryConfig?.shouldRetry
         };
+        this.apiKey = apiKey;
 
         this.setupInterceptors();
     }
@@ -70,5 +72,16 @@ export class EvolutionBridge {
 
     async patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
         return this.client.patch<T>(url, data, config);
+    }
+
+    async sendText(instance: string, number: string, text: string, config?: RequestConfig): Promise<AxiosResponse<any>> {
+        const url = `/message/sendText/${instance}`;
+        const data = { number, text };
+        const headers = {
+            'Content-Type': 'application/json',
+            'apikey': this.apiKey
+        };
+
+        return this.post(url, data, { ...config, headers });
     }
 }
