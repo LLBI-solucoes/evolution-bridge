@@ -14,6 +14,7 @@ import { EvolutionBridgeConfig, Post, SendText } from "../types";
 export class EvolutionBridge {
   private client: AxiosInstance;
   private instance: string;
+  private params = {};
 
   constructor(config: EvolutionBridgeConfig) {
     if (!config.url) {
@@ -32,12 +33,20 @@ export class EvolutionBridge {
       );
     }
 
+    if (config.params) {
+      this.params = config.params;
+    } else {
+      this.params = {};
+    }
+
     this.client = axios.create({
       baseURL: config.url,
       headers: {
         "Content-Type": "application/json",
         apikey: config.apiKey,
       },
+      maxBodyLength: Infinity,
+      params: { ...this.params },
     });
 
     this.instance = config.instance;

@@ -8,6 +8,7 @@ export interface EvolutionBridgeConfig {
   url: string;
   apiKey: string;
   instance: string;
+  params?: any[];
 }
 
 /**
