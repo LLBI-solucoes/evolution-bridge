@@ -54,6 +54,7 @@ export interface SendText {
   };
   config?: {
     params?: any;
+    asdasdasd: any;
   };
 }
 

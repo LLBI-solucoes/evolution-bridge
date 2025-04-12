@@ -60,7 +60,6 @@ export class EvolutionBridge {
    * @param {AxiosRequestConfig} [param0.config] - Optional request configuration.
    * @returns {Promise<AxiosResponse<T>>} - Returns a promise with the response of the request.
    */
-
   async sendText<T>({ data, config }: SendText): Promise<AxiosResponse<T>> {
     return this.post({
       url: `/message/sendText/${this.instance}`,
@@ -70,12 +69,12 @@ export class EvolutionBridge {
   }
 
   /**
-   * Private method to send a POST request to the EvolutionBridge.
+   * Sends a POST request to the EvolutionBridge.
    * @template T - The expected response type.
    * @param {Post} param0 - Object containing the request data and optional configuration.
-   * @param {string} param0.url - Full URL of the request.
-   * @param {any} param0.data - Data to be sent with the request.
-   * @param {AxiosRequestConfig} [param0.config] - Optional request configuration.
+   * @param {string} param0.url - URL of the request.
+   * @param {object} param0.data - Data for the request.
+   * @param { {params?: any} } [param0.config] - Optional request configuration.
    * @returns {Promise<AxiosResponse<T>>} - Returns a promise with the response of the request.
    */
   private async post<T>({
