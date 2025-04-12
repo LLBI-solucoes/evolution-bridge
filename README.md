@@ -18,36 +18,33 @@ npm install evolution-bridge
 ## Uso
 
 ```typescript
-import { EvolutionBridge } from 'evolution-bridge';
+import { EvolutionBridge } from "evolution-bridge";
 
 // Configuração básica
 const bridge = new EvolutionBridge({
-  baseURL: 'https://sua-api.com',
+  url: "https://api.evolutionbridge.com",
+  apiKey: "YOUR_API_KEY",
+  instance: "YOUR_INSTANCE_ID",
 });
 
-// Configuração com retry personalizado
-const bridgeWithRetry = new EvolutionBridge(
-  {
-    baseURL: 'https://sua-api.com',
-  },
-  {
-    retries: 3,
-    retryDelay: 1000,
-    shouldRetry: (error) => {
-      return error.response?.status >= 500;
-    },
-  }
-);
-
 // Exemplo de uso
-async function exemplo() {
-  try {
-    const response = await bridge.get('/endpoint');
-    console.log(response.data);
-  } catch (error) {
-    console.error('Erro:', error);
-  }
-}
+bridge
+  .sendText({
+    data: {
+      number: "YOUR_NUMBER",
+      text: "YOUR_MESSAGE",
+      quoted: {
+        key: {
+          id: "YOUR_MESSAGE_ID",
+        },
+        message: {
+          conversation: "asd",
+        },
+      },
+    },
+  })
+  .then((res) => console.log(res))
+  .catch((err: Error) => console.error(err.message));
 ```
 
 ## Contribuição
