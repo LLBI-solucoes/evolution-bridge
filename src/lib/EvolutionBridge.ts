@@ -30,6 +30,11 @@ class EvolutionBridge {
      * Envia um texto para um número
      * @param {SendText} sendText - Objeto com número e texto
      * @returns {Promise<any>} - Retorna uma promise com o resultado da requisição
+     * @example
+     * const result = await evolutionBridge.sendText({
+     *     number: '123456789',
+     *     text: 'Olá, mundo!',
+     * })
      */
     async sendText({ number, text }: SendText): Promise<any> {
         return ({
