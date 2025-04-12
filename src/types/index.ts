@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from "axios";
+
 /**
  * Interface para configuração do EvolutionBridge
  * @interface EvolutionBridgeConfig
@@ -19,4 +21,17 @@ export interface EvolutionBridgeConfig {
 export interface SendText {
     number: string,
     text: string
+}
+
+/**
+ * Parametros para requisição POST
+ * @interface Post
+ * @property {string} url - URL da requisição
+ * @property {any} data - Dados da requisição
+ * @property {AxiosRequestConfig} config - Configuração da requisição
+ */
+export interface Post {
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
 }
