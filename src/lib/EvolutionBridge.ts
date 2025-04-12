@@ -5,9 +5,12 @@ import { delay, shouldRetryRequest } from '../utils';
 export class EvolutionBridge {
     private client: AxiosInstance;
     private retryConfig: RetryConfig;
-    private apiKey?: string;
+    private apiKey: string;
 
-    constructor(config: EvolutionBridgeConfig = {}) {
+    constructor(config: EvolutionBridgeConfig) {
+        if (!config.apiKey) {
+            throw new Error('apiKey é obrigatória para inicializar o EvolutionBridge');
+        }
         const { retryConfig, apiKey, ...axiosConfig } = config;
 
         this.client = axios.create(axiosConfig);

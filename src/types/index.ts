@@ -12,8 +12,8 @@ export interface RetryConfig {
 export interface EvolutionBridgeConfig extends AxiosRequestConfig {
     /** Configurações específicas para o sistema de retry */
     retryConfig?: RetryConfig;
-    /** Chave da API já descriptografada */
-    apiKey?: string;
+    /** Chave da API já descriptografada (obrigatória) */
+    apiKey: string;
 }
 
 export interface RequestConfig extends AxiosRequestConfig {
