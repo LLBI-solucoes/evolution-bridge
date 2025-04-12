@@ -41,7 +41,7 @@ export class EvolutionBridge {
      *     text: 'Olá, mundo!',
      * })
      */
-    async sendText({ number, text }: SendText): Promise<AxiosResponse<any>> {
+    async sendText<T>({ number, text }: SendText): Promise<AxiosResponse<T>> {
         return this.post({
             url: `${this.url}/message/sendText/${this.instance}`,
             data: {
