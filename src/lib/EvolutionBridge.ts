@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { EvolutionBridgeConfig, Post, SendText } from "../types";
 
 /**
- * Classe para interagir com o EvolutionBridge
  * @class EvolutionBridge
+ * @description Classe para interagir com o Evolution API
  * @param {EvolutionBridgeConfig} config - Configuração do EvolutionBridge
  * @example
  * const evolutionBridge = new EvolutionBridge({
