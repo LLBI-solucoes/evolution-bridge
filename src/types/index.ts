@@ -52,7 +52,9 @@ export interface SendText {
     mentionsEveryOne?: boolean;
     mentioned?: string[];
   };
-  config?: AxiosRequestConfig;
+  config?: {
+    params?: any;
+  };
 }
 
 /**
