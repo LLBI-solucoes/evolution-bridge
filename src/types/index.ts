@@ -1,22 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
-
-export interface RetryConfig {
-    /** Número máximo de tentativas de retry */
-    retries?: number;
-    /** Delay em milissegundos entre as tentativas */
-    retryDelay?: number;
-    /** Função que determina se deve tentar novamente baseado no erro */
-    shouldRetry?: (error: any) => boolean;
-}
-
-export interface EvolutionBridgeConfig extends AxiosRequestConfig {
-    /** Configurações específicas para o sistema de retry */
-    retryConfig?: RetryConfig;
-    /** Chave da API já descriptografada (obrigatória) */
+export interface EvolutionBridgeConfig {
     apiKey: string;
-}
-
-export interface RequestConfig extends AxiosRequestConfig {
-    /** Contador de tentativas de retry para a requisição atual */
-    retryCount?: number;
+    instance: string;
 }
