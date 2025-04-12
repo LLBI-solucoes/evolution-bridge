@@ -1,3 +1,3 @@
-export * from './lib/EvolutionBridge';
+export { EvolutionBridge } from './lib/EvolutionBridge';
 export * from './types';
 

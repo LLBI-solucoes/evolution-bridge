@@ -10,7 +10,7 @@ import { EvolutionBridgeConfig, SendText } from '../types';
  *     instance: 'my-instance',   
  })
  */
-class EvolutionBridge {
+export class EvolutionBridge {
     private url: string;
     private apiKey: string;
     private instance: string;
@@ -46,5 +46,3 @@ class EvolutionBridge {
         })
     }
 }
-
-export default EvolutionBridge;
