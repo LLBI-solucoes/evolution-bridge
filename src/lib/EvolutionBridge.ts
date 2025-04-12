@@ -1,6 +1,16 @@
-import { EvolutionBridgeConfig } from '../types';
+import { EvolutionBridgeConfig, SendText } from '../types';
 
-export class EvolutionBridge {
+/**
+ * Classe para interagir com o EvolutionBridge
+ * @class EvolutionBridge
+ * @param {EvolutionBridgeConfig} config - Configuração do EvolutionBridge
+ * @example
+ * const evolutionBridge = new EvolutionBridge({
+ *     apiKey: '123456789',
+ *     instance: 'my-instance',   
+ })
+ */
+class EvolutionBridge {
     private apiKey: string;
     private instance: string;
 
@@ -18,7 +28,12 @@ export class EvolutionBridge {
     }
 
 
-    async sendText(number: string, text: string): Promise<any> {
+    /**
+     * Envia um texto para um número
+     * @param {SendText} sendText - Objeto com número e texto
+     * @returns {Promise<any>} - Retorna uma promise com o resultado da requisição
+     */
+    async sendText({ number, text }: SendText): Promise<any> {
         return ({
             apiKey: this.apiKey,
             instance: this.instance,
@@ -27,3 +42,5 @@ export class EvolutionBridge {
         })
     }
 }
+
+export default EvolutionBridge;
