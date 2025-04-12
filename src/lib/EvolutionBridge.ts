@@ -1,17 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { EvolutionBridgeConfig, Post, SendText } from "../types";
 
-/**
- * @class EvolutionBridge
- * @description Classe para interagir com o Evolution API
- * @param {EvolutionBridgeConfig} config - Configuração do EvolutionBridge
- * @example
- * const evolutionBridge = new EvolutionBridge({
- *     url: 'https://api.evolutionbridge.com',
- *     apiKey: '123456789',
- *     instance: 'my-instance',
- * })
- */
 export class EvolutionBridge {
   private client: AxiosInstance;
   private instance: string;
