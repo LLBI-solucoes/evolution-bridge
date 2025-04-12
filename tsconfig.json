@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2020", // Mais moderno
-    "module": "ESNext", // Ideal para tree-shaking
+    "target": "ES2020",
+    "module": "ESNext",
     "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
-    "declarationMap": true, // Ajuda em depuração
-    "sourceMap": true, // Também para depurar
+    "declarationMap": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
