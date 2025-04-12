@@ -7,9 +7,10 @@ import { EvolutionBridgeConfig, Post, SendText } from "../types";
  * @param {EvolutionBridgeConfig} config - Configuração do EvolutionBridge
  * @example
  * const evolutionBridge = new EvolutionBridge({
+ *     url: 'https://api.evolutionbridge.com',
  *     apiKey: '123456789',
  *     instance: 'my-instance',
- })
+ * })
  */
 export class EvolutionBridge {
   private client: AxiosInstance;
@@ -45,23 +46,43 @@ export class EvolutionBridge {
   }
 
   /**
-   * Envia um texto para um número
-   * @param {SendText} data - Objeto com número e texto
-   * @returns {Promise<T>} - Retorna uma promise com o resultado da requisição
-   * @example
-   * const result = await evolutionBridge.sendText({
-   *     number: '123456789',
-   *     text: 'Olá, mundo!',
-   * })
+   * Sends a text message using the EvolutionBridge.
+   * @template T - The expected response type.
+   * @param {SendText} param0 - Object containing the text data and optional configuration.
+   * @param {object} param0.data - Data for the text message.
+   * @param {string} param0.data.number - Recipient's number.
+   * @param {string} param0.data.text - Text to be sent.
+   * @param {number} [param0.data.delay] - Delay in seconds before sending the text.
+   * @param {Quoted} [param0.data.quoted] - Referenced message.
+   * @param {boolean} [param0.data.linkPreview] - Show link preview.
+   * @param {boolean} [param0.data.mentionsEveryOne] - Mention all users in the conversation.
+   * @param {string[]} [param0.data.mentioned] - Numbers of users to be mentioned.
+   * @param {AxiosRequestConfig} [param0.config] - Optional request configuration.
+   * @returns {Promise<AxiosResponse<T>>} - Returns a promise with the response of the request.
    */
-  async sendText<T>(data: SendText): Promise<AxiosResponse<T>> {
+
+  async sendText<T>({ data, config }: SendText): Promise<AxiosResponse<T>> {
     return this.post({
       url: `/message/sendText/${this.instance}`,
       data,
+      config,
     });
   }
 
-  private async post<T>({ url, data }: Post): Promise<AxiosResponse<T>> {
-    return this.client.post<T>(url, data);
+  /**
+   * Private method to send a POST request to the EvolutionBridge.
+   * @template T - The expected response type.
+   * @param {Post} param0 - Object containing the request data and optional configuration.
+   * @param {string} param0.url - Full URL of the request.
+   * @param {any} param0.data - Data to be sent with the request.
+   * @param {AxiosRequestConfig} [param0.config] - Optional request configuration.
+   * @returns {Promise<AxiosResponse<T>>} - Returns a promise with the response of the request.
+   */
+  private async post<T>({
+    url,
+    data,
+    config,
+  }: Post): Promise<AxiosResponse<T>> {
+    return this.client.post<T>(url, data, config);
   }
 }

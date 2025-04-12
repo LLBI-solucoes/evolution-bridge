@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from "axios";
+
 /**
  * Interface para configuração do EvolutionBridge
  * @interface EvolutionBridgeConfig
@@ -27,34 +29,30 @@ interface Quoted {
 }
 
 /**
- * Interface para opções
- * @interface Options
- * @description Opções para enviar um texto para um número
- * @property {number} delay - Delay em milissegundos
- * @property {Quoted} quoted - Objeto que representa um quoted
- * @property {boolean} linkPreview - Indica se o link deve ser previsto
- * @property {boolean} mentionsEveryOne - Indica se todos os usuários devem ser mencionados
- * @property {string[]} mentioned - Lista de usuários a serem mencionados
- */
-interface Options {
-  delay?: number;
-  quoted?: Quoted;
-  linkPreview?: boolean;
-  mentionsEveryOne?: boolean;
-  mentioned?: string[];
-}
-
-/**
- * Interface para enviar um texto para um número
+ * Interface para envio de texto via EvolutionBridge
  * @interface SendText
- * @description Objeto para enviar um texto para um número
- * @extends {Options}
- * @property {string} number - Número do destinatário
- * @property {string} text - Texto a ser enviado
+ * @description Configura o envio de um texto via EvolutionBridge
+ * @property {object} data - Dados do texto
+ * @property {string} data.number - N mero do destinat rio
+ * @property {string} data.text - Texto a ser enviado
+ * @property {number} [data.delay] - Tempo em segundos para aguardar antes de enviar o texto
+ * @property {Quoted} [data.quoted] - Mensagem referenciada
+ * @property {boolean} [data.linkPreview] - Mostrar preview de links
+ * @property {boolean} [data.mentionsEveryOne] - Marcar todos os usu rios da conversa
+ * @property {string[]} [data.mentioned] - N meros dos usu rios a serem mencionados
+ * @property {AxiosRequestConfig} [config] - Configura o da requisi o
  */
-export interface SendText extends Options {
-  number: string;
-  text: string;
+export interface SendText {
+  data: {
+    number: string;
+    text: string;
+    delay?: number;
+    quoted?: Quoted;
+    linkPreview?: boolean;
+    mentionsEveryOne?: boolean;
+    mentioned?: string[];
+  };
+  config?: AxiosRequestConfig;
 }
 
 /**
@@ -66,5 +64,6 @@ export interface SendText extends Options {
  */
 export interface Post {
   url: string;
-  data: any;
+  data?: any;
+  config?: AxiosRequestConfig;
 }
