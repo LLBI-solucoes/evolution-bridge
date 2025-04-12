@@ -11,6 +11,7 @@ export class EvolutionBridge {
         const { retryConfig, apiKey, ...axiosConfig } = config;
 
         this.client = axios.create(axiosConfig);
+
         this.retryConfig = {
             retries: retryConfig?.retries ?? 3,
             retryDelay: retryConfig?.retryDelay ?? 1000,
@@ -54,26 +55,6 @@ export class EvolutionBridge {
         );
     }
 
-    async get<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
-        return this.client.get<T>(url, config);
-    }
-
-    async post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
-        return this.client.post<T>(url, data, config);
-    }
-
-    async put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
-        return this.client.put<T>(url, data, config);
-    }
-
-    async delete<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
-        return this.client.delete<T>(url, config);
-    }
-
-    async patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
-        return this.client.patch<T>(url, data, config);
-    }
-
     async sendText(instance: string, number: string, text: string, config?: RequestConfig): Promise<AxiosResponse<any>> {
         const url = `/message/sendText/${instance}`;
         const data = { number, text };
@@ -83,5 +64,25 @@ export class EvolutionBridge {
         };
 
         return this.post(url, data, { ...config, headers });
+    }
+
+    private get<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.get<T>(url, config);
+    }
+
+    private async post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.post<T>(url, data, config);
+    }
+
+    private async put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.put<T>(url, data, config);
+    }
+
+    private async delete<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.delete<T>(url, config);
+    }
+
+    private async patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.patch<T>(url, data, config);
     }
 }
