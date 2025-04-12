@@ -33,13 +33,23 @@
     "url": "https://github.com/ll-bi/evolution-bridge/issues"
   },
   "homepage": "https://github.com/ll-bi/evolution-bridge#readme",
-  "dependencies": {
-    "axios": "^1.8.4"
+  "peerDependencies": {
+    "axios": "~1.8.4"
   },
   "devDependencies": {
-    "eslint": "^9.24.0",
-    "prettier": "^3.5.3",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
-  }
+    "eslint": "~9.24.0",
+    "prettier": "~3.5.3",
+    "tsx": "~4.19.3",
+    "typescript": "~5.8.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ]
 }
