@@ -1,6 +1,9 @@
 {
   "name": "evolution-bridge",
   "version": "0.0.10",
+  "author": "LL-BI Team",
+  "license": "ISC",
+  "description": "Uma ponte de integração robusta para a Evolution API com recursos avançados de retry e interceptação",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -22,9 +25,6 @@
     "api",
     "axios"
   ],
-  "author": "LL-BI Team",
-  "license": "ISC",
-  "description": "Uma ponte de integração robusta para a Evolution API com recursos avançados de retry e interceptação",
   "repository": {
     "type": "git",
     "url": "https://github.com/ll-bi/evolution-bridge.git"
