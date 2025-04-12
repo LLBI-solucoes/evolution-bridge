@@ -1,23 +1,19 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-
-export interface RetryConfig {
-    retries?: number;
-    retryDelay?: number;
-    shouldRetry?: (error: any) => boolean;
-}
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { EvolutionBridgeConfig, RequestConfig, RetryConfig } from './types';
+import { delay, shouldRetryRequest } from './utils';
 
 export class EvolutionBridge {
     private client: AxiosInstance;
     private retryConfig: RetryConfig;
 
-    constructor(config?: AxiosRequestConfig, retryConfig: RetryConfig = {}) {
-        this.client = axios.create(config);
+    constructor(config: EvolutionBridgeConfig = {}) {
+        const { retryConfig, ...axiosConfig } = config;
+
+        this.client = axios.create(axiosConfig);
         this.retryConfig = {
-            retries: retryConfig.retries || 3,
-            retryDelay: retryConfig.retryDelay || 1000,
-            shouldRetry: retryConfig.shouldRetry || ((error) => {
-                return axios.isAxiosError(error) && (!error.response || error.response.status >= 500);
-            })
+            retries: retryConfig?.retries ?? 3,
+            retryDelay: retryConfig?.retryDelay ?? 1000,
+            shouldRetry: retryConfig?.shouldRetry
         };
 
         this.setupInterceptors();
@@ -27,52 +23,55 @@ export class EvolutionBridge {
         this.client.interceptors.request.use(
             (config) => {
                 // Adiciona headers padrão se necessário
+                config.headers = config.headers || {};
                 return config;
             },
-            (error) => {
-                return Promise.reject(error);
-            }
+            (error) => Promise.reject(error)
         );
 
         this.client.interceptors.response.use(
             (response) => response,
             async (error) => {
-                const originalRequest = error.config;
+                const config = error.config as RequestConfig;
 
-                if (!originalRequest || !this.retryConfig.shouldRetry?.(error)) {
+                if (!config || !shouldRetryRequest(error, this.retryConfig)) {
                     return Promise.reject(error);
                 }
 
-                originalRequest.retryCount = originalRequest.retryCount || 0;
+                config.retryCount = config.retryCount || 0;
 
-                if (originalRequest.retryCount >= this.retryConfig.retries!) {
+                if (config.retryCount >= (this.retryConfig.retries || 3)) {
                     return Promise.reject(error);
                 }
 
-                originalRequest.retryCount += 1;
+                config.retryCount++;
 
-                const delayRetryRequest = new Promise((resolve) => {
-                    setTimeout(() => resolve(this.client(originalRequest)), this.retryConfig.retryDelay);
-                });
-
-                return delayRetryRequest;
+                await delay(this.retryConfig.retryDelay || 1000);
+                return this.client(config);
             }
         );
     }
 
-    async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    async get<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
         return this.client.get<T>(url, config);
     }
 
-    async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    async post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
         return this.client.post<T>(url, data, config);
     }
 
-    async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    async put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
         return this.client.put<T>(url, data, config);
     }
 
-    async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    async delete<T = any>(url: string, config?: RequestConfig): Promise<AxiosResponse<T>> {
         return this.client.delete<T>(url, config);
     }
+
+    async patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<AxiosResponse<T>> {
+        return this.client.patch<T>(url, data, config);
+    }
 }
+
+export * from './types';
+

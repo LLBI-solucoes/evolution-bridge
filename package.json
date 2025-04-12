@@ -1,12 +1,19 @@
 {
   "name": "evolution-bridge",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "echo \"No linting specified\" && exit 0",
     "prepublishOnly": "npm run build",
-    "publish": "npm publish --access public"
+    "preversion": "npm run lint && npm run test",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags",
+    "release:patch": "npm version patch && npm publish --access public",
+    "release:minor": "npm version minor && npm publish --access public",
+    "release:major": "npm version major && npm publish --access public"
   },
   "keywords": [
     "evolution",
