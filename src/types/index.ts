@@ -5,6 +5,7 @@
  * @property {string} instance - Instância do EvolutionBridge
  */
 export interface EvolutionBridgeConfig {
+    url: string;
     apiKey: string;
     instance: string;
 }
