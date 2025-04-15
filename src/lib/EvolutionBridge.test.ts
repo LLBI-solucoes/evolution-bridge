@@ -12,9 +12,12 @@ describe('EvolutionBridge', () => {
     instance: 'test-instance',
   };
 
+  let mockPost: jest.Mock;
+
   beforeEach(() => {
+    mockPost = jest.fn();
     mockedAxios.create.mockReturnValue({
-      post: jest.fn(),
+      post: mockPost,
       get: jest.fn(),
       put: jest.fn(),
       delete: jest.fn(),
@@ -72,11 +75,11 @@ describe('EvolutionBridge', () => {
         config: {} as any,
       };
 
-      mockedAxios.post.mockResolvedValueOnce(mockResponse);
+      mockPost.mockResolvedValueOnce(mockResponse);
 
       const response = await bridge.sendText({ data: messageData });
 
-      expect(mockedAxios.post).toHaveBeenCalledWith(
+      expect(mockPost).toHaveBeenCalledWith(
         `/message/sendText/${config.instance}`,
         messageData,
         expect.any(Object)
@@ -86,7 +89,7 @@ describe('EvolutionBridge', () => {
 
     it('should handle API errors', async () => {
       const error = new Error('API Error');
-      mockedAxios.post.mockRejectedValueOnce(error);
+      mockPost.mockRejectedValueOnce(error);
 
       await expect(bridge.sendText({ data: messageData })).rejects.toThrow('API Error');
     });
@@ -108,11 +111,11 @@ describe('EvolutionBridge', () => {
         config: {} as any,
       };
 
-      mockedAxios.post.mockResolvedValueOnce(mockResponse);
+      mockPost.mockResolvedValueOnce(mockResponse);
 
       const response = await bridge.sendText({ data: fullMessageData });
 
-      expect(mockedAxios.post).toHaveBeenCalledWith(
+      expect(mockPost).toHaveBeenCalledWith(
         `/message/sendText/${config.instance}`,
         fullMessageData,
         expect.any(Object)
