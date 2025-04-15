@@ -47,15 +47,15 @@ Write-Host "`nEnviando alterações para o repositório remoto..." -ForegroundCo
 git push origin master
 git push origin --tags
 
-Write-Host "`nPublicando no npm..." -ForegroundColor Blue
-npm publish --access public
+# Write-Host "`nPublicando no npm..." -ForegroundColor Blue
+# npm publish --access public
 
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "`nPublicação concluída com sucesso!" -ForegroundColor Green
-    Write-Host "Versão anterior: $currentVersion" -ForegroundColor Yellow
-    Write-Host "Nova versão: $newVersion" -ForegroundColor Yellow
-}
-else {
-    Write-Host "`nErro ao publicar no npm. Verifique os logs acima." -ForegroundColor Red
-    exit 1
-}
+# if ($LASTEXITCODE -eq 0) {
+#     Write-Host "`nPublicação concluída com sucesso!" -ForegroundColor Green
+#     Write-Host "Versão anterior: $currentVersion" -ForegroundColor Yellow
+#     Write-Host "Nova versão: $newVersion" -ForegroundColor Yellow
+# }
+# else {
+#     Write-Host "`nErro ao publicar no npm. Verifique os logs acima." -ForegroundColor Red
+#     exit 1
+# }

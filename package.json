@@ -13,7 +13,12 @@
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "release:check": "npm run test && npm run lint && git diff --exit-code",
+    "release": "npm run release:check && npm run build && npm run release:patch"
   },
   "keywords": [
     "evolution",
