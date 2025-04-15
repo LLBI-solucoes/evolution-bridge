@@ -50,12 +50,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saulotarsobc/evolution-bridge.git"
+    "url": "git+https://github.com/LLBI-solucoes/evolution-bridge.git"
   },
   "bugs": {
-    "url": "https://github.com/saulotarsobc/evolution-bridge/issues"
+    "url": "https://github.com/LLBI-solucoes/evolution-bridge/issues"
   },
-  "homepage": "https://github.com/saulotarsobc/evolution-bridge#readme",
+  "homepage": "https://github.com/LLBI-solucoes/evolution-bridge#readme",
   "engines": {
     "node": ">=14.0.0"
   }
