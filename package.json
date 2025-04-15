@@ -1,6 +1,6 @@
 {
   "name": "evolution-bridge",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Biblioteca TypeScript para integração com a API do Evolution",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
