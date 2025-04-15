@@ -15,8 +15,8 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
     "release:patch": "npm run test && npm run lint && npm version patch && npm publish",
-    "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish",
+    "release:minor": "npm run test && npm run lint && npm version minor && npm publish",
+    "release:major": "npm run test && npm run lint && npm version major && npm publish",
     "release:check": "npm run test && npm run lint && git diff --exit-code",
     "release": "npm run release:check && npm run build && npm run release:patch"
   },
