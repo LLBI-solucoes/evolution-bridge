@@ -57,7 +57,7 @@ export interface SendText {
   /** Configurações adicionais da requisição */
   config?: {
     /** Parâmetros de query string */
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
   };
 }
 
@@ -68,7 +68,7 @@ export interface Post {
   /** Endpoint da API */
   url: string;
   /** Dados a serem enviados */
-  data?: any;
+  data?: unknown;
   /** Configurações do Axios */
   config?: AxiosRequestConfig;
 }
