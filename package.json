@@ -29,7 +29,7 @@
   "author": "Evolution Bridge Team",
   "license": "MIT",
   "peerDependencies": {
-    "axios": "1.8.3"
+    "axios": "^1.8.3"
   },
   "dependencies": {},
   "devDependencies": {
