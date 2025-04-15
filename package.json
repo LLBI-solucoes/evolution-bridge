@@ -29,9 +29,8 @@
   "author": "Evolution Bridge Team",
   "license": "MIT",
   "peerDependencies": {
-    "axios": "^1.8.3"
+    "axios": "^1.8.4"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.1",
