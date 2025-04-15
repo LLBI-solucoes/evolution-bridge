@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
 /**
  * Configuração necessária para inicializar o EvolutionBridge

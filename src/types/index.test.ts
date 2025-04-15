@@ -1,9 +1,4 @@
-import {
-    EvolutionBridgeConfig,
-    Post,
-    SendText,
-    SendTextPayload
-} from './index';
+import { EvolutionBridgeConfig, Post, SendText, SendTextPayload } from './index';
 
 describe('Types', () => {
   describe('EvolutionBridgeConfig', () => {
@@ -11,7 +6,7 @@ describe('Types', () => {
       const config: EvolutionBridgeConfig = {
         url: 'https://api.evolution.com',
         apiKey: 'test-api-key',
-        instance: 'test-instance'
+        instance: 'test-instance',
       };
 
       expect(config).toHaveProperty('url');
@@ -24,7 +19,7 @@ describe('Types', () => {
     it('should have required properties', () => {
       const payload: SendTextPayload = {
         number: '5511999999999',
-        text: 'Test message'
+        text: 'Test message',
       };
 
       expect(payload).toHaveProperty('number');
@@ -38,7 +33,7 @@ describe('Types', () => {
         delay: 1000,
         linkPreview: true,
         mentionsEveryOne: true,
-        mentioned: ['5511999999999']
+        mentioned: ['5511999999999'],
       };
 
       expect(payload).toHaveProperty('delay');
@@ -53,8 +48,8 @@ describe('Types', () => {
       const sendText: SendText = {
         data: {
           number: '5511999999999',
-          text: 'Test message'
-        }
+          text: 'Test message',
+        },
       };
 
       expect(sendText).toHaveProperty('data');
@@ -64,13 +59,13 @@ describe('Types', () => {
       const sendText: SendText = {
         data: {
           number: '5511999999999',
-          text: 'Test message'
+          text: 'Test message',
         },
         config: {
           params: {
-            test: 'value'
-          }
-        }
+            test: 'value',
+          },
+        },
       };
 
       expect(sendText).toHaveProperty('config');
@@ -80,7 +75,7 @@ describe('Types', () => {
   describe('Post', () => {
     it('should have required properties', () => {
       const post: Post = {
-        url: '/test'
+        url: '/test',
       };
 
       expect(post).toHaveProperty('url');
@@ -92,13 +87,13 @@ describe('Types', () => {
         data: { test: 'value' },
         config: {
           headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+            'Content-Type': 'application/json',
+          },
+        },
       };
 
       expect(post).toHaveProperty('data');
       expect(post).toHaveProperty('config');
     });
   });
-}); 
+});

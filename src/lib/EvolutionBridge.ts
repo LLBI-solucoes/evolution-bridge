@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { EvolutionBridgeConfig, Post, SendText } from "../types";
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { EvolutionBridgeConfig, Post, SendText } from '../types';
 
 /**
  * EvolutionBridge - Classe principal para interação com a API do Evolution
@@ -39,27 +39,21 @@ export class EvolutionBridge {
     const { url, apiKey, instance } = config;
 
     if (!url) {
-      throw new Error(
-        "The 'url' property is required to initialize EvolutionBridge."
-      );
+      throw new Error("The 'url' property is required to initialize EvolutionBridge.");
     }
 
     if (!apiKey) {
-      throw new Error(
-        "The 'apiKey' property is required to initialize EvolutionBridge."
-      );
+      throw new Error("The 'apiKey' property is required to initialize EvolutionBridge.");
     }
 
     if (!instance) {
-      throw new Error(
-        "The 'instance' property is required to initialize EvolutionBridge."
-      );
+      throw new Error("The 'instance' property is required to initialize EvolutionBridge.");
     }
 
     this.client = axios.create({
       baseURL: url,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         apikey: apiKey,
       },
       maxBodyLength: Infinity,
@@ -112,10 +106,7 @@ export class EvolutionBridge {
    * });
    * ```
    */
-  public sendText<T>({
-    data,
-    config = {},
-  }: SendText): Promise<AxiosResponse<T>> {
+  public sendText<T>({ data, config = {} }: SendText): Promise<AxiosResponse<T>> {
     return this.post<T>({
       url: `/message/sendText/${this.instance}`,
       data,
