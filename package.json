@@ -14,7 +14,7 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "release:patch": "npm version patch && npm publish",
+    "release:patch": "npm run test && npm run lint && npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "release:check": "npm run test && npm run lint && git diff --exit-code",
